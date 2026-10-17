@@ -4,32 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Formatter</title>
-  
+
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%230b021a%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-family=%22sans-serif%22>N</text></svg>">
 
   <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
   <script src="https://unpkg.com/mammoth@1.12.3/mammoth.browser.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-  
+
 <style>
 /* =========================================================
    Flux Upload — design tokens
    ========================================================= */
 :root{
-  /* surfaces */
   --bg:#08090c;
   --bg-2:#0b0c11;
   --surface:rgba(255,255,255,.028);
   --surface-2:rgba(255,255,255,.05);
   --surface-3:rgba(255,255,255,.075);
 
-  /* borders */
   --border:rgba(255,255,255,.08);
   --border-2:rgba(255,255,255,.11);
   --border-strong:rgba(255,255,255,.16);
   --border-hi:rgba(255,255,255,.24);
 
-  /* text */
   --text:#f5f5f7;
   --text-2:#dcdce2;
   --text-3:#b8b8c2;
@@ -37,7 +34,6 @@
   --muted-2:#65656f;
   --muted-3:#3f3f48;
 
-  /* accents */
   --accent:#8b7cff;
   --accent-soft:#a99dff;
   --accent-deep:#5b48d9;
@@ -48,16 +44,13 @@
   --sky:#7cd4ff;
   --amber:#ffd166;
 
-  /* radii */
   --r-xs:8px; --r-sm:12px; --r:16px; --r-lg:22px; --r-xl:28px;
 
-  /* shadows */
   --sh-sm:0 8px 24px rgba(0,0,0,.3);
   --sh:0 24px 60px rgba(0,0,0,.45);
   --sh-deep:0 40px 120px rgba(0,0,0,.6);
   --sh-glow:0 0 120px rgba(139,124,255,.18);
 
-  /* easing */
   --ease:cubic-bezier(.2,.6,.2,1);
   --ease-out:cubic-bezier(.16,1,.3,1);
 }
@@ -84,7 +77,6 @@ body{
   isolation:isolate;
 }
 
-/* Atmosphere — мягкие радиальные свечения */
 body::before{
   content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
   background:
@@ -94,7 +86,6 @@ body::before{
     radial-gradient(ellipse 500px 500px at 80% 40%, rgba(255,124,154,.04), transparent 65%);
 }
 
-/* Grid overlay — почти невидимая сетка сверху */
 body::after{
   content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
   background-image:
@@ -127,10 +118,23 @@ button{cursor:pointer}
 }
 
 /* =========================================================
+   Обёртка контента
+   ========================================================= */
+#welcome-overlay{
+  display:flex;
+  justify-content:center;
+  width:100%;
+  padding:24px 20px 0;
+  position:relative;
+  z-index:1;
+  box-sizing:border-box;
+}
+
+/* =========================================================
    Ссылка в углу
    ========================================================= */
 .top-left-link{
-  position:absolute;
+  position:fixed;
   top:24px;left:24px;z-index:1000;
   display:inline-flex;align-items:center;gap:9px;
   padding:11px 20px;
@@ -146,8 +150,6 @@ button{cursor:pointer}
   transition:all .35s var(--ease);
   overflow:hidden;
 }
-
-/* блик, пробегающий при hover */
 .top-left-link::before{
   content:'';position:absolute;
   top:0;left:-40%;width:40%;height:100%;
@@ -155,7 +157,6 @@ button{cursor:pointer}
   transform:skewX(-20deg);
   transition:left .6s var(--ease-out);
 }
-
 .top-left-link:hover{
   transform:translateY(-2px);
   border-color:rgba(139,124,255,.5);
@@ -187,8 +188,6 @@ button{cursor:pointer}
   text-align:center;
   overflow:hidden;
 }
-
-/* градиентная линия сверху */
 .container::before{
   content:'';position:absolute;
   top:0;left:10%;right:10%;
@@ -196,8 +195,6 @@ button{cursor:pointer}
   background:linear-gradient(90deg, transparent, rgba(139,124,255,.8), rgba(201,255,61,.4), transparent);
   pointer-events:none;
 }
-
-/* мягкое внутреннее свечение в углу */
 .container::after{
   content:'';position:absolute;
   bottom:-200px;right:-200px;
@@ -207,7 +204,6 @@ button{cursor:pointer}
   pointer-events:none;
   filter:blur(60px);
 }
-
 .container > *{position:relative;z-index:1}
 
 h2{
@@ -275,7 +271,6 @@ h2{
   background:linear-gradient(180deg, rgba(139,124,255,.06), rgba(139,124,255,.01));
   border-color:rgba(139,124,255,.28);
 }
-
 .features-summary{
   display:flex;align-items:center;justify-content:space-between;
   padding:15px 18px;
@@ -291,7 +286,6 @@ h2{
 }
 .features-summary:hover{background:rgba(255,255,255,.02)}
 .features-summary::-webkit-details-marker{display:none}
-
 .features-summary::after{
   content:'›';
   display:inline-flex;
@@ -312,7 +306,6 @@ h2{
   color:#fff;
   box-shadow:0 0 16px var(--accent-glow);
 }
-
 .features-content{
   max-height:0;overflow:hidden;
   transition:max-height .4s cubic-bezier(.4,0,.2,1);
@@ -331,6 +324,15 @@ h2{
 .features-inner li::marker{color:var(--accent-soft)}
 .features-inner li:last-child{margin-bottom:0}
 .features-inner li strong{color:var(--text-2);font-weight:500}
+.features-inner code{
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:12.5px;
+  padding:2px 6px;
+  border-radius:5px;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border);
+  color:var(--accent-soft);
+}
 
 /* =========================================================
    Загрузка файла
@@ -354,7 +356,6 @@ h2{
   transition:all .35s var(--ease);
   overflow:hidden;
 }
-
 .custom-file-upload::before{
   content:'↑';
   display:inline-flex;
@@ -369,7 +370,6 @@ h2{
   transition:all .35s var(--ease);
   flex-shrink:0;
 }
-
 .custom-file-upload::after{
   content:'';position:absolute;inset:0;
   background:radial-gradient(circle at center, rgba(139,124,255,.12), transparent 70%);
@@ -377,7 +377,6 @@ h2{
   transition:opacity .4s var(--ease);
   pointer-events:none;
 }
-
 .custom-file-upload:hover{
   border-color:rgba(139,124,255,.55);
   color:var(--text);
@@ -406,6 +405,7 @@ h2{
   display:flex;
   align-items:center;
   justify-content:center;
+  flex-wrap:wrap;
   gap:8px;
 }
 .file-name:not(:empty)::before{
@@ -437,7 +437,6 @@ h2{
   letter-spacing:.02em;
   text-transform:uppercase;
 }
-
 @keyframes fadeIn{
   from{opacity:0;transform:translateY(-4px)}
   to{opacity:1;transform:translateY(0)}
@@ -493,8 +492,6 @@ h2{
     inset 0 -1px 0 rgba(0,0,0,.15),
     0 14px 40px rgba(139,124,255,.35);
 }
-
-/* периодический блик */
 .btn-primary::before{
   content:'';position:absolute;
   top:0;left:-40%;width:40%;height:100%;
@@ -507,7 +504,6 @@ h2{
   0%,60%{left:-40%}
   100%{left:140%}
 }
-
 .btn-primary:hover:not(:disabled){
   transform:translateY(-2px);
   background:linear-gradient(180deg, #a99dff, var(--accent-soft) 60%, var(--accent));
@@ -517,9 +513,7 @@ h2{
     inset 0 -1px 0 rgba(0,0,0,.15),
     0 20px 50px rgba(139,124,255,.45);
 }
-.btn-primary:active:not(:disabled){
-  transform:translateY(0) scale(.985);
-}
+.btn-primary:active:not(:disabled){transform:translateY(0) scale(.985)}
 .btn-primary:disabled{
   background:rgba(255,255,255,.05);
   color:var(--muted-2);
@@ -563,12 +557,11 @@ h2{
     border-color .3s ease;
 }
 .settings-panel.open{
-  max-height:420px;
+  max-height:460px;
   margin:16px 0;
   padding:20px;
   border-color:var(--border-2);
 }
-
 .setting-item{
   display:flex;
   justify-content:space-between;
@@ -659,7 +652,6 @@ input:focus-visible + .slider{
   margin-top:24px;
   animation:fadeIn .4s var(--ease);
 }
-
 .spinner{
   position:relative;
   width:44px;height:44px;
@@ -688,7 +680,6 @@ input:focus-visible + .slider{
   line-height:1.5;
   letter-spacing:-.005em;
 }
-
 .success-msg{
   color:var(--lime)!important;
   font-size:16px!important;
@@ -712,6 +703,8 @@ footer{
   letter-spacing:.02em;
   color:var(--muted-2);
   line-height:1.5;
+  position:relative;
+  z-index:1;
 }
 footer span{color:var(--text);font-weight:500}
 
@@ -720,6 +713,8 @@ footer span{color:var(--text);font-weight:500}
    ========================================================= */
 @media (max-width:600px){
   body{padding-top:78px}
+  #welcome-overlay{padding:16px 12px 0}
+
   .top-left-link{
     top:16px;left:16px;
     padding:9px 16px;
@@ -768,147 +763,89 @@ footer span{color:var(--text);font-weight:500}
   }
 }
 </style>
-
-
 </head>
 <body>
 
-  <div id="welcome-overlay" style="
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 24px 20px 0 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  position: relative;
-  z-index: 99999;
-">
-  <!-- Стили для адаптивности (плоский на ПК, плашка на мобилках) -->
-  <style>
-    .responsive-banner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      max-width: 650px;
-      background: linear-gradient(135deg, #c92a2a 0%, #e03131 100%);
-      color: #ffffff;
-      padding: 14px 20px;
-      box-sizing: border-box;
-    }
-    
-    /* Десктопный вид — плоская плашка без скруглений и теней */
-    @media (min-width: 769px) {
-      .responsive-banner {
-        border-radius: 0px;
-        border-bottom: 2px solid rgba(0, 0, 0, 0.15);
-      }
-    }
+  <div id="welcome-overlay">
+    <a href="https://nsuem.vercel.app/" target="_blank" class="top-left-link">
+      🔗 Services
+    </a>
 
-    /* Мобильный вид — скругленная карточка */
-    @media (max-width: 768px) {
-      .responsive-banner {
-        flex-direction: column;
-        max-width: 450px;
-        border-radius: 14px;
-        padding: 20px;
-        gap: 16px;
-        box-shadow: 0 8px 24px rgba(224, 49, 49, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-      .banner-text-block {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
-      .banner-controls {
-        width: 100%;
-        justify-content: space-between;
-      }
-    }
-  </style>
+    <div class="container" id="mainContainer">
+      <h2>Formatter</h2>
 
+      <div class="warning-box">
+        Документ автоматически форматируется согласно <a href="https://bi.nsuem.ru/upload/iblock/d60/%D0%9F%D0%BE%D1%80%D1%8F%D0%B4%D0%BE%D0%BA%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%B8%20%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8F%20%D0%BF%D0%B8%D1%81%D1%8C%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D1%85%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%20%D0%BE%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D1%85%D1%81%D1%8F.pdf" target="_blank">официальным правилам оформления НГУЭУ</a>.
+      </div>
 
+      <details class="features-details" id="featuresDetails">
+        <summary class="features-summary">
+          💡 Что умеет этот сервис?
+        </summary>
+        <div class="features-content" id="featuresContent">
+          <div class="features-inner">
+            <ul>
+              <li><strong>ГОСТ-стандарты полей:</strong> левое 30 мм, правое 10 мм, верх/низ по 20 мм.</li>
+              <li><strong>Типографика:</strong> единый шрифт Times New Roman (14 pt для текста, 1.5 интервал, абзацный отступ 1.25 см).</li>
+              <li><strong>Структура и разделы:</strong> центрирование ключевых блоков (Введение, Заключение и др.) и сквозная нумерация.</li>
+              <li><strong>Умные таблицы:</strong> автонумерация, границы по ГОСТу и выбор размера шрифта ячеек.</li>
+              <li><strong>Поддержка файлов:</strong> чтение <code>.docx</code> и безопасное чтение <code>.txt</code> (включая markdown-таблицы).</li>
+            </ul>
+          </div>
+        </div>
+      </details>
 
+      <label for="fileInput" class="custom-file-upload">
+        📁 Выбрать файл (.docx, .txt)
+      </label>
+      <input type="file" id="fileInput" accept=".docx, .txt" style="display: none;">
 
-  <a href="https://nsuem.vercel.app/" target="_blank" class="top-left-link">
-    🔗 Services
-  </a>
-  
-  <div class="container" id="mainContainer">
-    <h2>Formatter</h2>
-    
-    <div class="warning-box">
-      Документ автоматически форматируется согласно <a href="https://bi.nsuem.ru/upload/iblock/d60/%D0%9F%D0%BE%D1%80%D1%8F%D0%B4%D0%BE%D0%BA%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%B8%20%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8F%20%D0%BF%D0%B8%D1%81%D1%8C%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D1%85%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%20%D0%BE%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D1%85%D1%81%D1%8F.pdf" target="_blank">официальным правилам оформления НГУЭУ</a>.
-    </div>
+      <div id="fileName" class="file-name"></div>
 
-    <details class="features-details" id="featuresDetails">
-      <summary class="features-summary">
-        💡 Что умеет этот сервис?
-      </summary>
-      <div class="features-content" id="featuresContent">
-        <div class="features-inner">
-          <ul>
-            <li><strong>ГОСТ-стандарты полей:</strong> левое 30 мм, правое 10 мм, верх/низ по 20 мм.</li>
-            <li><strong>Типографика:</strong> единый шрифт Times New Roman (14 pt для текста, 1.5 интервал, абзацный отступ 1.25 см).</li>
-            <li><strong>Структура и разделы:</strong> центрирование ключевых блоков (Введение, Заключение и др.) и сквозная нумерация.</li>
-            <li><strong>Умные таблицы:</strong> автонумерация, границы по ГОСТу и выбор размера шрифта ячеек.</li>
-            <li><strong>Поддержка файлов:</strong> чтение <code>.docx</code> и безопасное чтение <code>.txt</code> (включая markdown-таблицы).</li>
-          </ul>
+      <div id="fileNameGroup" class="file-name-group">
+        <label for="outFileName">Имя сохраняемого файла (без .docx):</label>
+        <input type="text" id="outFileName" class="input-text" placeholder="Например: Лабораторная №4">
+      </div>
+
+      <button id="processBtn" class="btn-primary" disabled>Начать форматирование</button>
+
+      <button id="toggleSettings" class="btn-settings">⚙️ Расширенные настройки</button>
+
+      <div id="settingsPanel" class="settings-panel">
+        <div class="setting-item">
+          <span>Нумерация страниц (внизу по центру)</span>
+          <label class="switch">
+            <input type="checkbox" id="optPageNum" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <span>Скрыть номер на первой странице</span>
+          <label class="switch">
+            <input type="checkbox" id="optTitlePage" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <span>Разрыв страницы перед главами (Введение и др.)</span>
+          <label class="switch">
+            <input type="checkbox" id="optPageBreaks" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <span>Размер шрифта в таблицах</span>
+          <select id="optTableFont" class="setting-select">
+            <option value="24">12 pt</option>
+            <option value="20">10 pt</option>
+          </select>
         </div>
       </div>
-    </details>
 
-    <label for="fileInput" class="custom-file-upload">
-      📁 Выбрать файл (.docx, .txt)
-    </label>
-    <input type="file" id="fileInput" accept=".docx, .txt" style="display: none;">
-    
-    <div id="fileName" class="file-name"></div>
-
-    <div id="fileNameGroup" class="file-name-group">
-      <label for="outFileName">Имя сохраняемого файла (без .docx):</label>
-      <input type="text" id="outFileName" class="input-text" placeholder="Например: Лабораторная №4">
-    </div>
-
-    <button id="processBtn" class="btn-primary" disabled>Начать форматирование</button>
-    
-    <button id="toggleSettings" class="btn-settings">⚙️ Расширенные настройки</button>
-    
-    <div id="settingsPanel" class="settings-panel">
-      <div class="setting-item">
-        <span>Нумерация страниц (внизу по центру)</span>
-        <label class="switch">
-          <input type="checkbox" id="optPageNum" checked>
-          <span class="slider"></span>
-        </label>
+      <div id="loader" class="loader-wrapper">
+        <div class="spinner"></div>
+        <div id="status">Инициализация...</div>
       </div>
-      <div class="setting-item">
-        <span>Скрыть номер на первой странице</span>
-        <label class="switch">
-          <input type="checkbox" id="optTitlePage" checked>
-          <span class="slider"></span>
-        </label>
-      </div>
-      <div class="setting-item">
-        <span>Разрыв страницы перед главами (Введение и др.)</span>
-        <label class="switch">
-          <input type="checkbox" id="optPageBreaks" checked>
-          <span class="slider"></span>
-        </label>
-      </div>
-      <div class="setting-item">
-        <span>Размер шрифта в таблицах</span>
-        <select id="optTableFont" class="setting-select">
-          <option value="24">12 pt</option>
-          <option value="20">10 pt</option>
-        </select>
-      </div>
-    </div>
-    
-    <div id="loader" class="loader-wrapper">
-      <div class="spinner"></div>
-      <div id="status">Инициализация...</div>
     </div>
   </div>
 
@@ -936,10 +873,10 @@ footer span{color:var(--text);font-weight:500}
       if (e.target.files[0]) {
         uploadedFile = e.target.files[0];
         fileNameDiv.innerText = `Исходный файл: ${uploadedFile.name}`;
-        
-        let baseName = uploadedFile.name.replace(/\.[^/.]+$/, ""); 
+
+        let baseName = uploadedFile.name.replace(/\.[^/.]+$/, "");
         outFileNameInput.value = baseName + "_plus";
-        
+
         fileNameGroup.style.display = 'block';
         processBtn.disabled = false;
         loader.style.display = 'none';
@@ -947,7 +884,6 @@ footer span{color:var(--text);font-weight:500}
       }
     });
 
-    // Настоящий Drag & Drop файлов
     window.addEventListener('dragover', (e) => e.preventDefault());
     window.addEventListener('drop', (e) => {
       e.preventDefault();
@@ -964,17 +900,17 @@ footer span{color:var(--text);font-weight:500}
       loader.style.display = 'flex';
       spinner.style.display = 'block';
       statusDiv.className = '';
-      
+
       setTimeout(() => statusDiv.innerText = "Чтение файла...", 500);
       setTimeout(() => statusDiv.innerText = "Анализ структуры...", 1500);
       setTimeout(() => statusDiv.innerText = "Применение стилей ГОСТ НГУЭУ...", 2500);
       setTimeout(() => statusDiv.innerText = "Внедрение метаданных и сохранение...", 3200);
 
       try {
-        await new Promise(resolve => setTimeout(resolve, 3500)); // Оставляем для красивого UI, как просили
-        
+        await new Promise(resolve => setTimeout(resolve, 3500));
+
         const reader = new FileReader();
-        
+
         reader.onerror = () => {
           throw new Error("Ошибка чтения файла операционной системой.");
         };
@@ -983,8 +919,7 @@ footer span{color:var(--text);font-weight:500}
           try {
             const arrayBuffer = event.target.result;
             let resultHtml = "";
-            
-            // Защита и чтение .txt файлов
+
             if (uploadedFile.name.toLowerCase().endsWith('.txt')) {
                 let text = "";
                 try {
@@ -995,17 +930,16 @@ footer span{color:var(--text);font-weight:500}
                 const escapeHtml = str => str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
                 resultHtml = text.split(/\r?\n/).map(line => `<p>${escapeHtml(line)}</p>`).join('');
             } else {
-                // Чтение .docx через mammoth
                 const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
                 resultHtml = result.value;
             }
-            
+
             await generateGostDoc(resultHtml);
-            
+
             spinner.style.display = 'none';
             statusDiv.className = 'success-msg';
             statusDiv.innerText = "✨ Документ успешно отформатирован!";
-            
+
             setTimeout(() => {
               processBtn.style.display = 'block';
               toggleSettingsBtn.style.display = 'block';
@@ -1051,7 +985,6 @@ footer span{color:var(--text);font-weight:500}
       }
     });
 
-    // Рекурсивный обход узлов — решает проблему стилей при <br> и переносах строк
     function extractLines(domNode, baseOptions = {}) {
       const lines = [[]];
       function walk(node, currentOpts) {
@@ -1080,7 +1013,7 @@ footer span{color:var(--text);font-weight:500}
         }
       }
       walk(domNode, baseOptions);
-      
+
       if (lines.length === 1 && lines[0].length === 0 && domNode.textContent && domNode.textContent.trim()) {
         lines[0].push({
           text: domNode.textContent.trim(),
@@ -1105,11 +1038,10 @@ footer span{color:var(--text);font-weight:500}
       const elements = [];
       const parser = new DOMParser();
       const docHtml = parser.parseFromString(sourceHtml, 'text/html');
-      
+
       const allNodes = Array.from(docHtml.body.querySelectorAll('p, h1, h2, h3, h4, h5, h6, table, li'));
       const validNodes = [];
-      
-      // Защита от дублирования текста из вложенных таблиц и списков
+
       for (const node of allNodes) {
         if (node.nodeName !== 'TABLE' && node.closest('table')) continue;
         if (node.nodeName === 'P' && node.closest('li')) continue;
@@ -1121,10 +1053,8 @@ footer span{color:var(--text);font-weight:500}
       let pendingTableCaption = false;
       let isFirstSection = true;
 
-      // Отрисовка markdown таблиц
       function flushTextTable() {
         if (textTableRows.length === 1) {
-            // Если была всего одна строка с "|", выводим как обычный текст
             elements.push(new Paragraph({
               alignment: AlignmentType.JUSTIFIED,
               indent: { firstLine: convertMillimetersToTwip(12.5) },
@@ -1152,7 +1082,7 @@ footer span{color:var(--text);font-weight:500}
           const colWidthPct = Math.floor(100 / safeColsCount);
 
           const tableRows = textTableRows.map(row => {
-            while(row.length < safeColsCount) row.push(""); 
+            while(row.length < safeColsCount) row.push("");
             const cells = row.map(cellText => {
               return new TableCell({
                 width: { size: colWidthPct, type: WidthType.PERCENTAGE },
@@ -1177,9 +1107,9 @@ footer span{color:var(--text);font-weight:500}
           elements.push(new Paragraph({ children: [] }));
           elements.push(new Table({ rows: tableRows, width: { size: 100, type: WidthType.PERCENTAGE } }));
           elements.push(new Paragraph({ children: [] }));
-          
+
           textTableRows = [];
-          pendingTableCaption = false; 
+          pendingTableCaption = false;
         }
       }
 
@@ -1187,7 +1117,7 @@ footer span{color:var(--text);font-weight:500}
         if (node.nodeName !== 'TABLE') {
           const rawNodeText = (node.textContent || '').trim();
           const isListHeader = rawNodeText.endsWith(':') && rawNodeText.length < 150;
-          
+
           let prefix = "";
           if (node.nodeName === 'LI') {
               const parent = node.parentElement;
@@ -1204,38 +1134,35 @@ footer span{color:var(--text);font-weight:500}
           for (let i = 0; i < linesOpts.length; i++) {
               const lineOpts = linesOpts[i];
               let lineText = lineOpts.map(o => o.text).join('').replace(/\u00A0/g, ' ').trim();
-              
+
               if (!lineText && lineOpts.length === 0) continue;
 
-              // Маркер списка только для первой строчки
               if (node.nodeName === 'LI' && i === 0 && prefix) {
                   lineOpts.unshift({ text: prefix, font: 'Times New Roman', size: 28, bold: isListHeader, color: '000000' });
                   lineText = prefix + lineText;
               }
 
-              // Парсинг Markdown-таблиц
               if (lineText.includes('|') && lineText.split('|').length > 1) {
-                if (/^[:\s\-–|]+$/.test(lineText)) continue; // Пропускаем разделители
-                
+                if (/^[:\s\-–|]+$/.test(lineText)) continue;
+
                 let cells = lineText.split('|').map(c => c.trim());
                 if (cells[0] === '') cells.shift();
                 if (cells[cells.length - 1] === '') cells.pop();
-                
+
                 if (cells.length > 0) {
                     textTableRows.push(cells);
                     continue;
                 }
               } else {
-                flushTextTable(); 
+                flushTextTable();
               }
 
               let isCaption = false;
 
-              // Центрированные заголовки (ВВЕДЕНИЕ, ЗАКЛЮЧЕНИЕ и т.д.)
               if (/^\s*(ТЕХНИЧЕСКОЕ ЗАДАНИЕ|ПОЯСНИТЕЛЬНАЯ ЗАПИСКА|ОТЧЕТ|РЕФЕРАТ|ВВЕДЕНИЕ|ЗАКЛЮЧЕНИЕ|СОДЕРЖАНИЕ|СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ|СПИСОК ЛИТЕРАТУРЫ|ПРИЛОЖЕНИ[ЕЯ])[\s.:]*$/i.test(lineText)) {
                 const doPageBreak = optPageBreaks && !isFirstSection;
                 isFirstSection = false;
-                
+
                 if (lineOpts.length > 0) {
                     lineOpts[lineOpts.length - 1].text = lineOpts[lineOpts.length - 1].text.replace(/[\s.:]+$/, '');
                 }
@@ -1248,12 +1175,11 @@ footer span{color:var(--text);font-weight:500}
                   children: lineOpts.map(o => new TextRun({ ...o, bold: true, text: o.text.toUpperCase() }))
                 }));
 
-// Нумерованные главы (строго с заглавной буквы, без флага /i)
               } else if (node.nodeName !== 'LI' && /^\s*\d+(\.\d+)*\.?\s+[А-ЯЁA-Z]/.test(lineText) && lineText.length < 160 && !lineText.endsWith(':')) {
-                const isMainChapter = /^\s*\d+\.?\s+[А-ЯЁA-Z]/.test(lineText); 
+                const isMainChapter = /^\s*\d+\.?\s+[А-ЯЁA-Z]/.test(lineText);
                 const doPageBreak = isMainChapter && optPageBreaks && !isFirstSection;
                 if (isMainChapter) isFirstSection = false;
-                
+
                 if (lineOpts.length > 0) {
                     lineOpts[lineOpts.length - 1].text = lineOpts[lineOpts.length - 1].text.replace(/\.+$/, '');
                 }
@@ -1262,11 +1188,10 @@ footer span{color:var(--text);font-weight:500}
                   alignment: AlignmentType.JUSTIFIED,
                   indent: { firstLine: convertMillimetersToTwip(12.5) },
                   spacing: { line: 360, before: 240, after: 240 },
-                  pageBreakBefore: doPageBreak, 
+                  pageBreakBefore: doPageBreak,
                   children: lineOpts.map(o => new TextRun({ ...o, bold: true }))
                 }));
 
-              // Таблицы и Рисунки
               } else if (/^Таблица/i.test(lineText)) {
                 let match = lineText.match(/^Таблица\s+(\d+)/i);
                 if (match) tableCounter = parseInt(match[1], 10) + 1;
@@ -1286,7 +1211,6 @@ footer span{color:var(--text);font-weight:500}
                   children: lineOpts.map(o => new TextRun(o))
                 }));
               } else {
-                // Обычный абзац
                 elements.push(new Paragraph({
                   alignment: AlignmentType.JUSTIFIED,
                   indent: { firstLine: convertMillimetersToTwip(12.5) },
@@ -1297,7 +1221,7 @@ footer span{color:var(--text);font-weight:500}
               pendingTableCaption = isCaption;
           }
         } else if (node.nodeName === 'TABLE') {
-          flushTextTable(); 
+          flushTextTable();
 
           if (!pendingTableCaption) {
             elements.push(new Paragraph({
@@ -1348,7 +1272,7 @@ footer span{color:var(--text);font-weight:500}
         }
       }
 
-      flushTextTable(); 
+      flushTextTable();
 
       if (elements.length === 0) {
         elements.push(new Paragraph({ children: [new TextRun({ text: 'Текст не найден или не распознан.', font: 'Times New Roman', size: 28 })] }));
@@ -1366,7 +1290,7 @@ footer span{color:var(--text);font-weight:500}
       };
 
       const footersObj = {};
-      
+
       if (optTitlePage) {
         sectionProperties.titlePage = true;
         footersObj.first = new Footer({ children: [new Paragraph({ children: [] })] });
@@ -1378,7 +1302,7 @@ footer span{color:var(--text);font-weight:500}
             new Paragraph({
               alignment: AlignmentType.CENTER,
               children: [
-                new TextRun({ 
+                new TextRun({
                   children: [PageNumber.CURRENT],
                   font: 'Times New Roman',
                   size: 24
