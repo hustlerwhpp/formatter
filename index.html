@@ -4,22 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Formatter — форматирование документов по ГОСТ онлайн бесплатно</title>
-<meta name="description" content="Бесплатное онлайн-форматирование документов .docx и .txt по ГОСТ: шрифт Times New Roman, отступы, поля и междустрочный интервал — автоматически за несколько секунд, без установки программ.">
+<meta name="description" content="Бесплатное онлайн-форматирование документов .docx и .txt по ГОСТ: шрифт Times New Roman 14, поля, отступы и интервал — автоматически за несколько секунд.">
+<link rel="canonical" href="https://form.whpp.site/">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Formatter">
 <meta property="og:title" content="Formatter — форматирование документов по ГОСТ онлайн бесплатно">
-<meta property="og:description" content="Бесплатное онлайн-форматирование документов .docx и .txt по ГОСТ: шрифт Times New Roman, отступы, поля и междустрочный интервал — автоматически за несколько секунд, без установки программ.">
+<meta property="og:description" content="Бесплатное онлайн-форматирование документов .docx и .txt по ГОСТ: шрифт Times New Roman 14, поля, отступы и интервал — автоматически за несколько секунд.">
 <meta property="og:url" content="https://form.whpp.site/">
+<meta property="og:image" content="https://form.whpp.site/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2225%22 fill=%22%230b021a%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-family=%22sans-serif%22>N</text></svg>">
 
-  <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
-  <script src="https://unpkg.com/mammoth@1.12.3/mammoth.browser.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script>
+    // Библиотеки (docx, mammoth, FileSaver) грузятся лениво при первом нажатии
+    // «Форматировать»: они нужны только в момент обработки файла, а не при открытии страницы.
+    window.__formatterLibsPromise = null;
+    function loadFormatterLibs() {
+      if (window.__formatterLibsPromise) return window.__formatterLibsPromise;
+      var urls = [
+        'https://unpkg.com/docx@8.5.0/build/index.umd.js',
+        'https://unpkg.com/mammoth@1.12.3/mammoth.browser.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js'
+      ];
+      window.__formatterLibsPromise = urls.reduce(function (p, u) {
+        return p.then(function () {
+          return new Promise(function (res, rej) {
+            var s = document.createElement('script');
+            s.src = u;
+            s.onload = res;
+            s.onerror = function () { rej(new Error('Не удалось загрузить библиотеку: ' + u)); };
+            document.head.appendChild(s);
+          });
+        });
+      }, Promise.resolve());
+      return window.__formatterLibsPromise;
+    }
+  </script>
 
 <style>
 /* =========================================================
@@ -216,7 +242,7 @@ button{cursor:pointer}
 }
 .container > *{position:relative;z-index:1}
 
-h2{
+h1,h2{
   margin:0 0 22px;
   font-size:26px;font-weight:600;
   letter-spacing:-.028em;
@@ -737,7 +763,7 @@ footer span{color:var(--text);font-weight:500}
     padding:30px 22px 26px;
     border-radius:var(--r-lg);
   }
-  h2{font-size:22px;margin-bottom:18px}
+  h1,h2{font-size:22px;margin-bottom:18px}
 
   .warning-box{padding:14px 14px 14px 42px;font-size:13px}
   .warning-box::before{left:13px;width:20px;height:20px;font-size:12px}
@@ -758,7 +784,7 @@ footer span{color:var(--text);font-weight:500}
 @media (max-width:380px){
   body{padding:20px 12px}
   .container{padding:26px 16px 22px}
-  h2{font-size:20px}
+  h1,h2{font-size:20px}
   .btn-primary{padding:12px 16px;font-size:14px}
 }
 
@@ -773,6 +799,9 @@ footer span{color:var(--text);font-weight:500}
   }
 }
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Formatter","url":"https://form.whpp.site/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"RUB"},"description":"Бесплатное онлайн-форматирование документов .docx и .txt по ГОСТ: шрифт Times New Roman 14, поля, отступы и интервал — автоматически за несколько секунд."}
+</script>
 </head>
 <body>
 
@@ -782,7 +811,7 @@ footer span{color:var(--text);font-weight:500}
     </a>
 
     <div class="container" id="mainContainer">
-      <h2>Formatter</h2>
+      <h1>Formatter</h1>
 
       <div class="warning-box">
         Документ автоматически форматируется согласно <a href="https://bi.nsuem.ru/upload/iblock/d60/%D0%9F%D0%BE%D1%80%D1%8F%D0%B4%D0%BE%D0%BA%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%B8%20%D0%BD%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8F%20%D0%BF%D0%B8%D1%81%D1%8C%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D1%85%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%20%D0%BE%D0%B1%D1%83%D1%87%D0%B0%D1%8E%D1%89%D0%B8%D1%85%D1%81%D1%8F.pdf" target="_blank">официальным правилам оформления НГУЭУ</a>.
@@ -917,6 +946,7 @@ footer span{color:var(--text);font-weight:500}
       setTimeout(() => statusDiv.innerText = "Внедрение метаданных и сохранение...", 3200);
 
       try {
+        await loadFormatterLibs();
         await new Promise(resolve => setTimeout(resolve, 3500));
 
         const reader = new FileReader();
@@ -1344,12 +1374,5 @@ footer span{color:var(--text);font-weight:500}
       saveAs(blob, finalFileName);
     }
   </script>
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-ym(112719606, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:false});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/112719606" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
 </body>
 </html>
