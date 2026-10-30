@@ -1050,6 +1050,224 @@ footer span{color:#2E3138}
   body,body::before,body::after{background:#F6F1E9;background-image:none}
   .container,.settings-panel,.top-left-link,.input-text,.setting-select{background:#FFFDF8}
 }
+
+/* MATERIAL DARK — тёмный слой поверх премиума (безусловный).
+   Только палитра и сплошные фоны: раскладка, отступы и тексты не меняются.
+   Палитра: фон #121212, поверхности #1D1E24 / #26282F, текст #F2F2F5,
+   приглушённый #A8A8B3, рамка rgba(255,255,255,0.12), акцент #B7C4FF,
+   мягкий акцент rgba(183,196,255,0.16), текст на акценте #1E2436.
+   Стекло убрано полностью. Семантические цвета (.file-name, .success-msg,
+   .error-msg) сознательно не тронуты. */
+:root{
+  --bg:#121212;
+  --bg-2:#1D1E24;
+  --surface:#1D1E24;
+  --surface-2:#26282F;
+  --surface-3:rgba(183,196,255,0.16);
+  --border:rgba(255,255,255,0.12);
+  --border-2:rgba(255,255,255,0.12);
+  --border-strong:#B7C4FF;
+  --border-hi:#B7C4FF;
+  --text:#F2F2F5;
+  --text-2:#F2F2F5;
+  --text-3:#A8A8B3;
+  --muted:#A8A8B3;
+  --muted-2:#A8A8B3;
+  --muted-3:rgba(255,255,255,0.12);
+  --accent:#B7C4FF;
+  --accent-soft:#B7C4FF;
+  --accent-deep:#B7C4FF;
+  --accent-glow:none;
+  --sh-sm:0 2px 10px rgba(0,0,0,0.45);
+  --sh:0 12px 28px rgba(0,0,0,0.45);
+  --sh-deep:0 12px 32px rgba(0,0,0,0.45);
+  --sh-glow:none;
+}
+*,*::before,*::after{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+body{
+  background:#121212;
+  background-color:#121212;
+  background-image:none;
+  color:#F2F2F5;
+}
+body::before,body::after{display:none;background:none;background-image:none;filter:none;-webkit-mask-image:none;mask-image:none}
+::selection{background:rgba(183,196,255,0.16);color:#F2F2F5}
+::-webkit-scrollbar-track{background:#121212}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-color:#121212}
+::-webkit-scrollbar-thumb:hover{background:#B7C4FF}
+:focus-visible{outline:2px solid #B7C4FF;outline-offset:2px}
+.top-left-link{
+  background:#1D1E24;
+  border:1px solid rgba(255,255,255,0.12);
+  color:#F2F2F5;
+  border-radius:999px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.45);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.top-left-link::before{display:none;background:none}
+.top-left-link:hover{
+  border-color:#B7C4FF;
+  background:rgba(183,196,255,0.16);
+  box-shadow:0 8px 20px rgba(0,0,0,0.45);
+}
+.top-left-link:hover::before{display:none}
+.container{
+  background:#1D1E24;
+  background-color:#1D1E24;
+  border:1px solid rgba(255,255,255,0.12);
+  color:#F2F2F5;
+  border-radius:28px;
+  box-shadow:0 12px 32px rgba(0,0,0,0.45);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.container::before{background:#B7C4FF}
+.container::after{display:none;background:none;filter:none}
+h1,h2{
+  background:none;
+  -webkit-background-clip:initial;
+  background-clip:initial;
+  -webkit-text-fill-color:#F2F2F5;
+  color:#F2F2F5;
+}
+.warning-box{
+  border:1px solid rgba(255,255,255,0.12);
+  background:#1D1E24;
+  color:#F2F2F5;
+}
+.warning-box::before{
+  background:#B7C4FF;
+  color:#1E2436;
+  box-shadow:none;
+}
+.warning-box a{color:#B7C4FF}
+.warning-box a:hover{color:#B7C4FF}
+.features-details{
+  background:#1D1E24;
+  border:1px solid rgba(255,255,255,0.12);
+  color:#F2F2F5;
+}
+.features-details:hover{border-color:#B7C4FF}
+.features-details.is-open{background:#1D1E24;border-color:#B7C4FF}
+.features-summary{color:#F2F2F5}
+.features-summary:hover{background:rgba(183,196,255,0.16)}
+.features-summary::after{
+  background:rgba(183,196,255,0.16);
+  border:1px solid rgba(255,255,255,0.12);
+  color:#B7C4FF;
+}
+.features-details.is-open .features-summary::after{
+  background:#B7C4FF;
+  border-color:#B7C4FF;
+  color:#1E2436;
+  box-shadow:none;
+}
+.features-inner{border-top:1px solid rgba(255,255,255,0.12);color:#A8A8B3}
+.features-inner li::marker{color:#B7C4FF}
+.features-inner li strong{color:#F2F2F5}
+.features-inner code{
+  background:rgba(183,196,255,0.16);
+  border:1px solid rgba(255,255,255,0.12);
+  color:#F2F2F5;
+}
+.custom-file-upload{
+  border:2px dashed rgba(255,255,255,0.12);
+  background:#1D1E24;
+  color:#A8A8B3;
+}
+.custom-file-upload::before{
+  background:rgba(183,196,255,0.16);
+  border:1px solid rgba(255,255,255,0.12);
+  color:#B7C4FF;
+}
+.custom-file-upload::after{display:none;background:none;opacity:0}
+.custom-file-upload:hover{
+  border-color:#B7C4FF;
+  color:#F2F2F5;
+  background:rgba(183,196,255,0.16);
+}
+.custom-file-upload:hover::before{
+  background:#B7C4FF;
+  border-color:#B7C4FF;
+  color:#1E2436;
+  box-shadow:none;
+}
+.file-name-group label{color:#A8A8B3}
+.input-text{
+  border:1px solid rgba(255,255,255,0.12);
+  background:#26282F;
+  color:#F2F2F5;
+}
+.input-text::placeholder{color:#A8A8B3}
+.input-text:hover{border-color:#B7C4FF}
+.input-text:focus{
+  border-color:#B7C4FF;
+  background:#26282F;
+  box-shadow:0 0 0 4px rgba(183,196,255,0.16);
+}
+.btn-primary{
+  color:#1E2436;
+  background:#B7C4FF;
+  border-radius:999px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.45);
+}
+.btn-primary::before{display:none;background:none;animation:none}
+.btn-primary:hover:not(:disabled){
+  background:#B7C4FF;
+  box-shadow:0 8px 20px rgba(0,0,0,0.45);
+}
+.btn-primary:disabled{
+  background:#26282F;
+  color:#A8A8B3;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+.btn-settings{
+  color:#F2F2F5;
+  background:#1D1E24;
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:999px;
+  box-shadow:none;
+}
+.btn-settings:hover{
+  color:#F2F2F5;
+  background:rgba(183,196,255,0.16);
+  border-color:#B7C4FF;
+}
+.settings-panel{
+  background:#1D1E24;
+  border:1px solid transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.settings-panel.open{border-color:rgba(255,255,255,0.12)}
+.setting-item{color:#F2F2F5;border-bottom:1px solid rgba(255,255,255,0.12)}
+.setting-select{
+  border:1px solid rgba(255,255,255,0.12);
+  background:#26282F;
+  color:#F2F2F5;
+}
+.setting-select:hover{background:rgba(183,196,255,0.16);border-color:#B7C4FF}
+.setting-select:focus{border-color:#B7C4FF;box-shadow:0 0 0 3px rgba(183,196,255,0.16)}
+.setting-select option{background:#1D1E24;color:#F2F2F5}
+.slider{background:rgba(255,255,255,0.12);box-shadow:inset 0 1px 2px rgba(0,0,0,0.45)}
+.slider::before{background:#F2F2F5;box-shadow:0 2px 6px rgba(0,0,0,0.45)}
+.slider:hover{background:rgba(183,196,255,0.16)}
+input:checked + .slider{background:#B7C4FF;box-shadow:none}
+input:checked + .slider::before{box-shadow:0 2px 8px rgba(0,0,0,0.45)}
+input:focus-visible + .slider{outline:2px solid #B7C4FF}
+.spinner{
+  border:3px solid rgba(255,255,255,0.12);
+  border-top-color:#B7C4FF;
+  border-right-color:#B7C4FF;
+}
+.spinner::before{display:none;background:none}
+#status{color:#A8A8B3}
+footer{color:#A8A8B3}
+footer span{color:#F2F2F5}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Formatter","url":"https://form.whpp.site/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"RUB"},"description":"Бесплатное онлайн-форматирование документов .docx и .txt по ГОСТ: шрифт Times New Roman 14, поля, отступы и интервал — автоматически за несколько секунд."}
