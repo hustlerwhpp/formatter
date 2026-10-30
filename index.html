@@ -1268,6 +1268,213 @@ input:focus-visible + .slider{outline:2px solid #B7C4FF}
 #status{color:#A8A8B3}
 footer{color:#A8A8B3}
 footer span{color:#F2F2F5}
+
+/* NORMAL DESIGN — обычный светлый вид. Маркер слоя: NORMAL DESIGN */
+
+/* NORMAL DESIGN — обычный светлый вид поверх всех прошлых слоёв.
+   Палитра: фон #F4F5F7, карточки #FFFFFF, текст #111827,
+   приглушённый #6B7280, рамка #E5E7EB, акцент #2563EB, текст на акценте
+   белый, мягкий акцент #DBEAFE. Радиусы: карточки 12px, кнопки 8px.
+   Никаких градиентов в хроме, никакого стекла, никаких свечений.
+   Семантические цвета (.file-name, .success-msg, .error-msg) не тронуты. */
+:root{
+  --bg:#F4F5F7;
+  --bg-2:#FFFFFF;
+  --surface:#FFFFFF;
+  --surface-2:#FFFFFF;
+  --surface-3:#DBEAFE;
+  --border:#E5E7EB;
+  --border-2:#E5E7EB;
+  --border-strong:#2563EB;
+  --border-hi:#2563EB;
+  --text:#111827;
+  --text-2:#111827;
+  --text-3:#6B7280;
+  --muted:#6B7280;
+  --muted-2:#6B7280;
+  --muted-3:#E5E7EB;
+  --accent:#2563EB;
+  --accent-soft:#2563EB;
+  --accent-deep:#2563EB;
+  --accent-glow:none;
+  --sh-sm:0 1px 3px rgba(0,0,0,0.08);
+  --sh:0 1px 3px rgba(0,0,0,0.08);
+  --sh-deep:0 4px 12px rgba(0,0,0,0.08);
+  --sh-glow:none;
+}
+*,*::before,*::after{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+body{
+  background:#F4F5F7;
+  background-color:#F4F5F7;
+  background-image:none;
+  color:#111827;
+}
+body::before,body::after{display:none;background:none;background-image:none;filter:none;-webkit-mask-image:none;mask-image:none}
+::selection{background:#DBEAFE;color:#111827}
+::-webkit-scrollbar-track{background:#F4F5F7}
+::-webkit-scrollbar-thumb{background:#E5E7EB;border-color:#F4F5F7}
+::-webkit-scrollbar-thumb:hover{background:#2563EB}
+:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+.top-left-link{
+  background:#FFFFFF;
+  border:1px solid #E5E7EB;
+  color:#111827;
+  border-radius:8px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.top-left-link::before{display:none;background:none}
+.top-left-link:hover{
+  border-color:#2563EB;
+  background:#DBEAFE;
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+}
+.top-left-link:hover::before{display:none}
+.container{
+  background:#FFFFFF;
+  background-color:#FFFFFF;
+  border:1px solid #E5E7EB;
+  color:#111827;
+  border-radius:12px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.container::before{background:#2563EB}
+.container::after{display:none;background:none;filter:none}
+h1,h2{
+  background:none;
+  -webkit-background-clip:initial;
+  background-clip:initial;
+  -webkit-text-fill-color:#111827;
+  color:#111827;
+}
+.warning-box{
+  border:1px solid #E5E7EB;
+  background:#FFFFFF;
+  color:#111827;
+}
+.warning-box::before{
+  background:#2563EB;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+.warning-box a{color:#2563EB}
+.warning-box a:hover{color:#2563EB}
+.features-details{
+  background:#FFFFFF;
+  border:1px solid #E5E7EB;
+  color:#111827;
+}
+.features-details:hover{border-color:#2563EB}
+.features-details.is-open{background:#FFFFFF;border-color:#2563EB}
+.features-summary{color:#111827}
+.features-summary:hover{background:#DBEAFE}
+.features-summary::after{
+  background:#DBEAFE;
+  border:1px solid #E5E7EB;
+  color:#2563EB;
+}
+.features-details.is-open .features-summary::after{
+  background:#2563EB;
+  border-color:#2563EB;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+.features-inner{border-top:1px solid #E5E7EB;color:#6B7280}
+.features-inner li::marker{color:#2563EB}
+.features-inner li strong{color:#111827}
+.features-inner code{
+  background:#DBEAFE;
+  border:1px solid #E5E7EB;
+  color:#111827;
+}
+.custom-file-upload{
+  border:2px dashed #E5E7EB;
+  background:#FFFFFF;
+  color:#6B7280;
+}
+.custom-file-upload::before{
+  background:#DBEAFE;
+  border:1px solid #E5E7EB;
+  color:#2563EB;
+}
+.custom-file-upload::after{display:none;background:none;opacity:0}
+.custom-file-upload:hover{
+  border-color:#2563EB;
+  color:#111827;
+  background:#DBEAFE;
+}
+.custom-file-upload:hover::before{
+  background:#2563EB;
+  border-color:#2563EB;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+.file-name-group label{color:#6B7280}
+.input-text{
+  border:1px solid #E5E7EB;
+  background:#FFFFFF;
+  color:#111827;
+}
+.input-text::placeholder{color:#6B7280}
+.input-text:hover{border-color:#2563EB}
+.input-text:focus{
+  border-color:#2563EB;
+  background:#FFFFFF;
+  box-shadow:0 0 0 4px #DBEAFE;
+}
+.btn-primary{
+  color:#FFFFFF;
+  background:#2563EB;
+  border-radius:8px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+}
+.btn-primary::before{display:none;background:none;animation:none}
+.btn-primary:hover:not(:disabled){
+  background:#2563EB;
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+}
+.btn-primary:disabled{
+  background:#F4F5F7;
+  color:#6B7280;
+  box-shadow:inset 0 0 0 1px #E5E7EB;
+}
+.btn-settings{
+  color:#111827;
+  background:#FFFFFF;
+  border:1px solid #E5E7EB;
+  border-radius:8px;
+  box-shadow:none;
+}
+.btn-settings:hover{
+  color:#111827;
+  background:#DBEAFE;
+  border-color:#2563EB;
+}
+.settings-panel{
+  background:#FFFFFF;
+  border:1px solid transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.settings-panel.open{border-color:#E5E7EB}
+.setting-item{color:#111827;border-bottom:1px solid #E5E7EB}
+.setting-select{
+  border:1px solid #E5E7EB;
+  background:#FFFFFF;
+  color:#111827;
+}
+.setting-select:hover{background:#DBEAFE;border-color:#2563EB}
+.setting-select:focus{border-color:#2563EB;box-shadow:0 0 0 3px #DBEAFE}
+.setting-select option{background:#FFFFFF;color:#111827}
+input:checked + .slider{background:#2563EB;box-shadow:none}
+input:focus-visible + .slider{outline:2px solid #2563EB}
+
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Formatter","url":"https://form.whpp.site/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"RUB"},"description":"Бесплатное онлайн-форматирование документов .docx и .txt по ГОСТ: шрифт Times New Roman 14, поля, отступы и интервал — автоматически за несколько секунд."}
