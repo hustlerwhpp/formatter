@@ -818,6 +818,238 @@ footer span{color:var(--text);font-weight:500}
   .container{background:rgba(14,15,22,0.98);backdrop-filter:none;-webkit-backdrop-filter:none}
   .settings-panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(20,21,30,0.98)}
 }
+/* PREMIUM — «тихий люкс» (светлый): перебивает тёмную тему и Liquid Glass.
+   Палитра: фон #F6F1E9, карточки #FFFDF8, текст #2E3138, приглушённый #6E7280,
+   рамка #E3DDD2, акцент #6F87A0, мягкий акцент #E4EAF0. Стекло убрано полностью.
+   Акцент — только дозированно: ссылки, фокус, активные состояния, мелкие детали. */
+:root{
+  --bg:#F6F1E9;
+  --bg-2:#F6F1E9;
+  --surface:#FFFDF8;
+  --surface-2:#FFFDF8;
+  --surface-3:#E4EAF0;
+  --border:#E3DDD2;
+  --border-2:#E3DDD2;
+  --border-strong:#6F87A0;
+  --border-hi:#6F87A0;
+  --text:#2E3138;
+  --text-2:#2E3138;
+  --text-3:#6E7280;
+  --muted:#6E7280;
+  --muted-2:#6E7280;
+  --muted-3:#E3DDD2;
+  --accent:#6F87A0;
+  --accent-soft:#6F87A0;
+  --accent-deep:#5F7A92;
+  --accent-glow:none;
+  --sh-sm:0 2px 10px rgba(46,49,56,0.06);
+  --sh:0 12px 28px rgba(46,49,56,0.10);
+  --sh-deep:0 12px 32px rgba(46,49,56,0.10);
+  --sh-glow:none;
+}
+*,*::before,*::after{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+body{
+  background:#F6F1E9;
+  background-color:#F6F1E9;
+  color:#2E3138;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  padding:24px 16px;
+}
+body::before,body::after{display:none;background:none;background-image:none;filter:none;-webkit-mask-image:none;mask-image:none}
+::selection{background:#E4EAF0;color:#2E3138}
+::-webkit-scrollbar-track{background:#F6F1E9}
+::-webkit-scrollbar-thumb{background:#E3DDD2;border-color:#F6F1E9}
+::-webkit-scrollbar-thumb:hover{background:#6F87A0}
+:focus-visible{outline:2px solid #6F87A0;outline-offset:2px}
+.top-left-link{
+  background:#FFFDF8;
+  border:1px solid #E3DDD2;
+  color:#2E3138;
+  box-shadow:0 2px 10px rgba(46,49,56,0.06);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.top-left-link::before{display:none;background:none}
+.top-left-link:hover{
+  transform:translateY(-2px);
+  border-color:#6F87A0;
+  background:#E4EAF0;
+  box-shadow:0 8px 20px rgba(46,49,56,0.10);
+}
+.top-left-link:hover::before{display:none}
+.container{
+  background:#FFFDF8;
+  background-color:#FFFDF8;
+  border:1px solid #E3DDD2;
+  color:#2E3138;
+  padding:48px 48px 44px;
+  box-shadow:0 12px 32px rgba(46,49,56,0.10);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.container::before{background:#6F87A0}
+.container::after{display:none;background:none;filter:none}
+h1,h2{
+  background:none;
+  -webkit-background-clip:initial;
+  background-clip:initial;
+  -webkit-text-fill-color:#2E3138;
+  color:#2E3138;
+}
+.warning-box{
+  border:1px solid #E3DDD2;
+  background:#FFFDF8;
+  color:#2E3138;
+}
+.warning-box::before{
+  background:#6F87A0;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+.warning-box a{color:#6F87A0}
+.warning-box a:hover{color:#5F7A92}
+.features-details{
+  background:#FFFDF8;
+  border:1px solid #E3DDD2;
+  color:#2E3138;
+}
+.features-details:hover{border-color:#6F87A0}
+.features-details.is-open{background:#FFFDF8;border-color:#6F87A0}
+.features-summary{color:#2E3138}
+.features-summary:hover{background:#E4EAF0}
+.features-summary::after{
+  background:#E4EAF0;
+  border:1px solid #E3DDD2;
+  color:#6F87A0;
+}
+.features-details.is-open .features-summary::after{
+  transform:rotate(90deg);
+  background:#6F87A0;
+  border-color:#6F87A0;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+.features-inner{border-top:1px solid #E3DDD2;color:#6E7280}
+.features-inner li::marker{color:#6F87A0}
+.features-inner li strong{color:#2E3138}
+.features-inner code{
+  background:#E4EAF0;
+  border:1px solid #E3DDD2;
+  color:#2E3138;
+}
+.custom-file-upload{
+  border:2px dashed #E3DDD2;
+  background:#FFFDF8;
+  color:#6E7280;
+}
+.custom-file-upload::before{
+  background:#E4EAF0;
+  border:1px solid #E3DDD2;
+  color:#6F87A0;
+}
+.custom-file-upload::after{display:none;background:none;opacity:0}
+.custom-file-upload:hover{
+  border-color:#6F87A0;
+  color:#2E3138;
+  background:#E4EAF0;
+}
+.custom-file-upload:hover::before{
+  background:#6F87A0;
+  border-color:#6F87A0;
+  color:#FFFFFF;
+  box-shadow:none;
+}
+.file-name{color:#4F7A4E}
+.file-name:not(:empty)::before{
+  background:#E4EAF0;
+  border:1px solid #6F87A0;
+  color:#4F7A4E;
+}
+.file-name-group label{color:#6E7280}
+.input-text{
+  border:1px solid #E3DDD2;
+  background:#FFFFFF;
+  color:#2E3138;
+}
+.input-text::placeholder{color:#6E7280}
+.input-text:hover{border-color:#6F87A0}
+.input-text:focus{
+  border-color:#6F87A0;
+  background:#FFFFFF;
+  box-shadow:0 0 0 4px rgba(111,135,160,0.18);
+}
+.btn-primary{
+  color:#FFFFFF;
+  background:#6F87A0;
+  box-shadow:0 2px 10px rgba(46,49,56,0.10);
+}
+.btn-primary::before{display:none;background:none;animation:none}
+.btn-primary:hover:not(:disabled){
+  background:#5F7A92;
+  box-shadow:0 8px 20px rgba(46,49,56,0.12);
+}
+.btn-primary:disabled{
+  background:#E4EAF0;
+  color:#6E7280;
+  box-shadow:inset 0 0 0 1px #E3DDD2;
+}
+.btn-settings{
+  color:#2E3138;
+  background:#FFFDF8;
+  border:1px solid #E3DDD2;
+  box-shadow:none;
+}
+.btn-settings:hover{
+  color:#2E3138;
+  background:#E4EAF0;
+  border-color:#6F87A0;
+}
+.settings-panel{
+  background:#FFFDF8;
+  border:1px solid transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.settings-panel.open{border-color:#E3DDD2;padding:22px}
+.setting-item{color:#2E3138;border-bottom:1px solid #E3DDD2}
+.setting-select{
+  border:1px solid #E3DDD2;
+  background:#FFFFFF;
+  color:#2E3138;
+}
+.setting-select:hover{background:#E4EAF0;border-color:#6F87A0}
+.setting-select:focus{border-color:#6F87A0;box-shadow:0 0 0 3px rgba(111,135,160,0.18)}
+.setting-select option{background:#FFFDF8;color:#2E3138}
+.slider{background:#E3DDD2;box-shadow:inset 0 1px 2px rgba(46,49,56,0.10)}
+.slider::before{background:#FFFFFF;box-shadow:0 2px 6px rgba(46,49,56,0.20)}
+.slider:hover{background:#E4EAF0}
+input:checked + .slider{background:#6F87A0;box-shadow:none}
+input:checked + .slider::before{box-shadow:0 2px 8px rgba(46,49,56,0.20)}
+input:focus-visible + .slider{outline:2px solid #6F87A0}
+.spinner{
+  border:3px solid #E3DDD2;
+  border-top-color:#6F87A0;
+  border-right-color:#6F87A0;
+}
+.spinner::before{display:none;background:none}
+#status{color:#6E7280}
+.success-msg{color:#4F7A4E !important;text-shadow:none}
+.error-msg{color:#B4534A !important;text-shadow:none}
+footer{color:#6E7280}
+footer span{color:#2E3138}
+@media (prefers-reduced-transparency:reduce){
+  *,*::before,*::after{
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    animation:none !important;
+    transition:none !important;
+  }
+  body,body::before,body::after{background:#F6F1E9;background-image:none}
+  .container,.settings-panel,.top-left-link,.input-text,.setting-select{background:#FFFDF8}
+}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Formatter","url":"https://form.whpp.site/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"RUB"},"description":"Бесплатное онлайн-форматирование документов .docx и .txt по ГОСТ: шрифт Times New Roman 14, поля, отступы и интервал — автоматически за несколько секунд."}
