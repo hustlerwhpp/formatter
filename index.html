@@ -799,12 +799,37 @@ footer span{color:var(--text);font-weight:500}
   }
 }
 </style>
+<style>
+/* MONO */
+:root{--bg:#FFFFFF;--bg-2:#FAFAFA;--surface:#FFFFFF;--surface-2:#F5F5F5;--surface-3:#F0F0F0;--border:#E5E5E5;--border-2:#D4D4D4;--border-strong:#CFCFCF;--border-hi:#BBBBBB;--text:#111111;--text-2:#222222;--text-3:#333333;--muted:#666666;--muted-2:#737373;--muted-3:#A3A3A3;--accent:#111111;--accent-soft:#333333;--accent-deep:#111111;--accent-glow:rgba(0,0,0,0.08);--lime:#555555;--coral:#333333;--sky:#555555;--amber:#333333;--on-accent:#FFFFFF;}
+@media (prefers-color-scheme: dark){html:not([data-theme]){--bg:#111111;--bg-2:#1A1A1A;--surface:#1A1A1A;--surface-2:#222222;--surface-3:#262626;--border:#2E2E2E;--border-2:#333333;--border-strong:#404040;--border-hi:#4D4D4D;--text:#F5F5F5;--text-2:#E5E5E5;--text-3:#D4D4D4;--muted:#A3A3A3;--muted-2:#8A8A8A;--muted-3:#737373;--accent:#FFFFFF;--accent-soft:#D4D4D4;--accent-deep:#FFFFFF;--accent-glow:rgba(0,0,0,0.30);--lime:#A3A3A3;--coral:#D4D4D4;--sky:#A3A3A3;--amber:#D4D4D4;--on-accent:#111111;}}
+html[data-theme="dark"]{--bg:#111111;--bg-2:#1A1A1A;--surface:#1A1A1A;--surface-2:#222222;--surface-3:#262626;--border:#2E2E2E;--border-2:#333333;--border-strong:#404040;--border-hi:#4D4D4D;--text:#F5F5F5;--text-2:#E5E5E5;--text-3:#D4D4D4;--muted:#A3A3A3;--muted-2:#8A8A8A;--muted-3:#737373;--accent:#FFFFFF;--accent-soft:#D4D4D4;--accent-deep:#FFFFFF;--accent-glow:rgba(0,0,0,0.30);--lime:#A3A3A3;--coral:#D4D4D4;--sky:#A3A3A3;--amber:#D4D4D4;--on-accent:#111111;}
+html[data-theme="light"]{--bg:#FFFFFF;--bg-2:#FAFAFA;--surface:#FFFFFF;--surface-2:#F5F5F5;--surface-3:#F0F0F0;--border:#E5E5E5;--border-2:#D4D4D4;--border-strong:#CFCFCF;--border-hi:#BBBBBB;--text:#111111;--text-2:#222222;--text-3:#333333;--muted:#666666;--muted-2:#737373;--muted-3:#A3A3A3;--accent:#111111;--accent-soft:#333333;--accent-deep:#111111;--accent-glow:rgba(0,0,0,0.08);--lime:#555555;--coral:#333333;--sky:#555555;--amber:#333333;--on-accent:#FFFFFF;}
+body{background:var(--bg)!important;color:var(--text)!important}
+.top-left-link{background:var(--surface)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.top-left-link::before{display:none!important}
+.top-left-link:hover{border-color:var(--border-hi)!important;transform:none!important}
+.warning-box{background:var(--surface-2)!important;border-color:var(--border-strong)!important;color:var(--text)!important}
+.warning-box::before{background:var(--accent)!important;color:var(--on-accent)!important;box-shadow:none!important}
+.warning-box a{color:var(--text)!important}
+.btn-primary{background:var(--accent)!important;color:var(--on-accent)!important;box-shadow:none!important}
+.btn-primary::before{display:none!important}
+.btn-primary:hover:not(:disabled){background:var(--accent)!important;transform:none!important;box-shadow:none!important}
+.btn-primary:disabled{background:var(--surface-2)!important;color:var(--muted)!important;box-shadow:none!important}
+.btn-settings{background:var(--surface-2)!important;color:var(--text)!important;border:1px solid var(--border)!important}
+.custom-file-upload{background:var(--surface)!important;border-color:var(--border-strong)!important}
+.custom-file-upload::before{background:var(--accent)!important;color:var(--on-accent)!important}
+.custom-file-upload:hover::before{background:var(--accent)!important;box-shadow:none!important}
+.custom-file-upload:hover{box-shadow:none!important}
+.theme-toggle-btn{position:fixed;top:24px;right:24px;z-index:1000;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:12px;padding:11px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Formatter","url":"https://form.whpp.site/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","inLanguage":"ru","offers":{"@type":"Offer","price":"0","priceCurrency":"RUB"},"description":"Бесплатное онлайн-форматирование документов .docx и .txt по ГОСТ: шрифт Times New Roman 14, поля, отступы и интервал — автоматически за несколько секунд."}
 </script>
 
 
   
+<script>try{var t=localStorage.getItem("whpp-form-theme");if(t==="dark"||t==="light"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}</script>
 </head>
 <body>
 
@@ -1380,5 +1405,7 @@ footer span{color:var(--text);font-weight:500}
 
 
   
+<button id="themeToggle" type="button" class="theme-toggle-btn">Тёмная тема</button>
+<script>(function(){var b=document.getElementById("themeToggle");if(!b)return;function isDark(){var t=document.documentElement.getAttribute("data-theme");if(t==="dark")return true;if(t==="light")return false;return window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;}function render(){b.textContent=isDark()?"Светлая тема":"Тёмная тема";}b.addEventListener("click",function(){var n=isDark()?"light":"dark";document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("whpp-form-theme",n);}catch(e){}render();});render();})();</script>
 </body>
 </html>
